@@ -12,11 +12,8 @@ We can simply see the result from typescript scripting.
 
 ##Typescript is an OO programming language
 We can create a module, like the namespace in .net, and import this namespace into ts file, we then can create interface and classes in module.
-
-###The one beauty of typescript is we can simply create a javascript function to call class and function in this typescript. 
+We can simply create a javascript function to call class and function in this typescript. 
 After typescript is created and saved, a new js file is created automatically. 
-
-###The another beauty of typescript is that typescript can use jquery and can interact with the element and selector in html page via native javascript.
+Typescript can use jquery and can interact with the element and selector in html page via native javascript.
 Typescript allows us to inject third party typescript files as reference.
-
 Asp.net Core can integrate typescript in razor view very well as this demo indicated. Have a fun.
