@@ -10,8 +10,7 @@ Open app.ts file and add some typescript code in and save it again, we can see a
 Use require js to load this app.js in html page.
 We can simply see the result from typescript scripting.
 
-##Typescript is an OO programming language
-We can create a module, like the namespace in .net, and import this namespace into ts file, we then can create interface and classes in module.
+Typescript is an OO programming language.We can create a module, like the namespace in .net, and import this namespace into ts file, we then can create interface and classes in module.
 We can simply create a javascript function to call class and function in this typescript. 
 After typescript is created and saved, a new js file is created automatically. 
 Typescript can use jquery and can interact with the element and selector in html page via native javascript.
