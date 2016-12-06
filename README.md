@@ -38,7 +38,7 @@ Open VS 2015, select new project , web, and asp.net core web application to crea
 Create a new folder called api under controllers folder, Add a new controller called SlotsController.cs.
 Create a folder called Slots under views folder, add a new item called index.cshtml in this folder.
 Add attributes at the top of the controller as below
-
+<pre>
 
     [Route("api/Slots")]
     [EnableCors("CorsPolicy")]
@@ -57,14 +57,14 @@ public SlotsController(InventoryContext context, ILogger<SlotsController> logger
             _logger = logger;
  }
 
-
  }
-
+ </pre>
+ 
 
 Asp.net Core is dependency injection automatically enabled development platform, so can simply inject the data source InventoryContext and microsoft logger sevice in API controller easily, so we do not need to download third party dependency injection IoC containers . Here, _context is the data source we created in asp.net core Entity Framework data access layer in this web application.
  
 Create Get,  Put, Delete,  and Post actions in this controller as the example below. 
-
+<pre>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Slot slot)
         {
@@ -215,6 +215,7 @@ Create Get,  Put, Delete,  and Post actions in this controller as the example be
             return Json("done");
         }
 
+</pre>
 Now an Asp.net web api has been created for front end developent.
 
 
@@ -223,6 +224,7 @@ Now an Asp.net web api has been created for front end developent.
 At moment, we forget about angular js. We use built in typescript in asp.net core for front end development.
 Create a folder called ts under wwwroot folder and add a new item , select typescript and create a new app.ts file under this new folder
 Add  below code to app.ts 
+<pre>
 module slotlocal
 {
     interface Islot {
@@ -274,35 +276,20 @@ function callbacka(data)
     });
 }
 
-
+</pre>
 
 
 Here, we simple define a module that actually is a namespace. In this module, we add an interface and class that can be exported (can be seen in public). We enable Jquery in typescript and then we embed $.ajax call in typescript, This section programming is similar to C#.
 
-
 Then we create a function to consume this class in typescript.  Function in TypeScript can access DOM directly to send or get data from DOM. W call function here is a middle tier. DOM is front end view, and typescript is the backend. This middle tier glue DOM view and typescript class together. So you forget about javascript here.DOM can call this function directly. This function is the javascript function in typescript. It plays key role in exposing typescript class to DOM.
-
 
 Now in Razor cshtml page add some html controls in as example below
 
-
- < table id="customerTable" border="0" cellpadding="3">
-        < tr>
-            < th>Slot No< /th>
-            < th>Slot Name< /th>
-            < th>Description< /th>
-            < th>
-                < input type="button"  id=”search”  value="Search" onclick="searchslot()" />
-            < /th>
-        < /tr>
-       
-    < /table>
-
+<img src="xsc1.png">
 
 After Click search button , we can see two records are displayed as below
 
 <img src="xsc.png">
-
 
 ### 3, Summary
 
