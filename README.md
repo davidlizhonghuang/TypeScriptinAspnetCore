@@ -241,7 +241,7 @@ module slotlocal
         public desc: string;
 
 
-        public SelectSlot(callback: any): void {
+         public SelectSlot(callback: any): void {
             $.ajax({
                method: "GET",
                 url: "AllSlots"
@@ -264,12 +264,12 @@ function searchslot() {
 function callbacka(data)
 {
     $.each(data, function (key, val) {
-        var tableRow = '<tr>' +
-            '<td>' + val.slotNo + '</td>' +
-            '<td><input type="text" value="' + val.slotName + '"/></td>' +
-            '<td><input type="text" value="' + val.description + '"/></td>' +
-            '<td><input type="button" name="btnUpdate" value="Update" /> <input type="button" name="btnDelete" value="Delete" /></td>' +
-            '</tr>';
+        var tableRow = '< tr>' +
+            '< td>' + val.slotNo + '< /td>' +
+            '< td>< input type="text" value="' + val.slotName + '"/>< /td>' +
+            '< td>< input type="text" value="' + val.description + '"/>< /td>' +
+            '< td>< input type="button" name="btnUpdate" value="Update" /> < input type="button" name="btnDelete" value="Delete" />< /td>' +
+            '< /tr>';
         $('#customerTable').append(tableRow);
     });
 }
@@ -286,17 +286,17 @@ Then we create a function to consume this class in typescript.  Function in Type
 Now in Razor cshtml page add some html controls in as example below
 
 
- <table id="customerTable" border="0" cellpadding="3">
-        <tr>
-            <th>Slot No</th>
-            <th>Slot Name</th>
-            <th>Description</th>
-            <th>
-                <input type="button"  id=”search”  value="Search" onclick="searchslot()" />
-            </th>
-        </tr>
+ < table id="customerTable" border="0" cellpadding="3">
+        < tr>
+            < th>Slot No< /th>
+            < th>Slot Name< /th>
+            < th>Description< /th>
+            < th>
+                < input type="button"  id=”search”  value="Search" onclick="searchslot()" />
+            < /th>
+        < /tr>
        
-    </table>
+    < /table>
 
 
 After Click search button , we can see two records are displayed as below
