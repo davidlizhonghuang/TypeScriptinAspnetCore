@@ -223,7 +223,6 @@ Now an Asp.net web api has been created for front end developent.
 At moment, we forget about angular js. We use built in typescript in asp.net core for front end development.
 Create a folder called ts under wwwroot folder and add a new item , select typescript and create a new app.ts file under this new folder
 Add  below code to app.ts 
-
 module slotlocal
 {
     interface Islot {
@@ -302,6 +301,7 @@ Now in Razor cshtml page add some html controls in as example below
 
 After Click search button , we can see two records are displayed as below
 
+<img src="xsc.png">
 
 
 ### 3, Summary
