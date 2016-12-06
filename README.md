@@ -1,4 +1,4 @@
-# TypeScript in Aspnet Core
+# TypeScript CRUD operations in Aspnet Core
 
 Asp.net core, next generation of web application, uses TypeScript now. see <a href="https://www.typescriptlang.org/#download-links">link</a> here.
 Asp.net core has built all necessary environment for developer to develop typescript as javascript's way. we do not worry about the gulp,task runner,etc.
