@@ -91,7 +91,7 @@ Of course, we can make asp.net 5 core a big gut via add middleware in.
 TypeScript can be installed in various ways, VS 2015 has taken typescript as a default js programming in vs 2015 asp.net core. Typescript 2 now is available, namespace is invented to represent internal module and module now can be the external module.
 TypeScript is module design pattern programming language. We develop different modules that we added them as a reference to be used in different instance classes. The programming is as easy as C# if you know C#. The following steps are briefly documented how to develop a demo typescript CRUD operations in Asp.net Core Tea Inventory web application.
 
-###add jquery to typescript
+###Add jquery knockout to TypeScript
 Asp.net core has jquery default loaded. However, if we do not let TypeScript know Jquery, if we run $ in typescript, we get error, so we need a way to integrate jquery to typescript, knockout to typescript, angular js to typescript,etc. It is an easy way I found here to make those integration worked. That is
 
 1, Us Nuget to download Jquery.TypeScript.DefinedType package to asp.net core. open reference to find out the downloaded package and right click it, open file in window explorer, now we copy the jquery.d.ts or knockout.d.ts to wwwroot folder.
