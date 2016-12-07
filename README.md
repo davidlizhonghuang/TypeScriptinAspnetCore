@@ -89,7 +89,7 @@ Of course, we can make asp.net 5 core a big gut via add middleware in.
 ##TypeScript in Asp.net Core
 
 TypeScript can be installed in various ways, VS 2015 has taken typescript as a default js programming in vs 2015 asp.net core. Typescript 2 now is available, namespace is invented to represent internal module and module now can be the external module.
-TypeScript is module design pattern programming language. We develop different modules that we added them as a reference to be used in different instance classes. The programming is as easy as C# if you know C#. The following steps are briefly documented how to develop a demo typescript CRUD operations in Asp.net Core Tea Inventory web application.
+TypeScript is module design pattern programming language. We develop different modules that we added them as a reference to be used in different instance classes. The programming is as easy as C# if you know C#. 
 
 ###Add jquery knockout to TypeScript
 Asp.net core has jquery default loaded. However, if we do not let TypeScript know Jquery, if we run $ in typescript, we get error, so we need a way to integrate jquery to typescript, knockout to typescript, angular js to typescript,etc. It is an easy way I found here to make those integration worked. That is
@@ -102,6 +102,36 @@ Asp.net core has jquery default loaded. However, if we do not let TypeScript kno
 
 4, add the generated app.js file that contains ko and $ from ts file to the end of the < body> tag. this can allow ko find out the window.document.body DOM and run the code.
 
+###BundlerMinifier.Core
+
+in asp.net we used bundleconfig.cs file to bundle all js files into one place. you have no other optons to bundle files baed on requirement. asp.net core introduces BundlerMinifier.Core as a new default bundle minifer to precomile bundle file base on  BundleConfig.json. Default does not process this automatically, you need to do a little thing for this. For example, you create a new json in bunldeconfig.json as below
+
+<pre>
+ {
+    "outputFileName": "wwwroot/app/bundle.js",
+    "inputFiles": [
+      "wwwroot/lib/jquery/dist/jquery.js",
+      "wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "wwwroot/lib/jquery-validation/dist/jquery.validate.js",
+      "wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+</pre>
+This tells core that i want to merge all input files into one bundle.js file through minifying. When run project, dotnet bundle is run to make this happens. Hwoever, it is not automatically, in order to be auto, we need do one more thing, add 
+<pre>
+"scripts": {
+  "precompile": [
+    "dotnet bundle"
+  ]
+}
+</pre>
+to project.json, it means package of precomplie is enabed in each run. now after you click run , you will see a new bundle.js file is created in app folder under wwwroot folder. to make sure 
+"tools": {
+  "BundlerMinifier.Core": "2.0.238",
+, this tool is being installed in project.
+The following steps are briefly documented how to develop a demo typescript CRUD operations in Asp.net Core Tea Inventory web application.
 ###1, Create a new asp.net Core web app
 
 Open VS 2015, select new project , web, and asp.net core web application to create a new asp.net web core application.
