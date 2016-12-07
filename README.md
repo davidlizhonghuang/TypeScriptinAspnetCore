@@ -26,6 +26,66 @@ We can ignore asp.net MVC pattern in core and simply use html page in wwwroot fo
 
 Asp.net Core's power is its capability of developing loose coupled enterprise based responsive web applications for modern multiple devices cross platforms such as Apple IOS. I have developed an internal multiple tier Tea Inventory project in asp.net core by using anguar js 1.5, httpclient web api proxy, wep api 2, and asp.net core entity frameworks as well as SQL server 2016. Now I want to show you how to do typescript pogramming in asp.net core web application in an easy way.
 
+##Asp.net Core Middleware
+
+Httpmodule for file name retriving and httphandler for other http requests in asp.net 4 pipeline, both are registered in web.config, are disappeared in asp.net 5 together with global.aspx , web.config, and application life cycle. Asp.net 5 uses middleware to replace all of them.
+
+### error handler
+The first middleware in asp.net 5 is the error handler in default startup file such as below
+app.UseExceptionHandler("/Home/Error");
+
+We can create a custom error handler class to manage errors , to remove above default error hander, and add the custom handler to the middleware. This error handling class injects a chaining requestdelegate into the class to link all middlewares together. After that a task is created to deploy the task this middleware wants to deploy. When this class is ready, we can then simply add this handler to the middleware as below
+app.UseMiddleware(typeof(TeaErrorHandler));
+
+This middleware will manage all exceptions from the context that go through the eentire pipeline middleware.  
+
+###add cors policy
+CORS is the headache in asp.net 4. asp.net 5 and core can elegantly sort out the mess problems for developers. If we want to enable cors for a controller, we simply use [enablecors("corepolicy")] attribute to open a hole for this secured api controller. How api controller knows corepolicy, we do this in startup middleware. we add a corepolicy in startup configure method as below
+
+<pre>
+ services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
+</pre>
+
+Then we register this policy in middleware for checking. see example below
+
+app.UseCors("CorsPolicy")
+
+that is it. now we can add this policy to controller for CORS.
+
+###Asp.net core appsettings.json
+
+Web.config has been replaced by this json file. so we can set sql connection string here, we can set key/value pairs here. Then we can call parameters from this json in environment for parameter management in application. we of course need to chain this to middlware for application that can acknowledge this. see the code below
+
+   services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+Now we can say the data in json can be seen by the controller, for example , now we can inject the setting data to account controller as below
+<pre>
+  private readonly AppSettings _appSettings;
+
+        public AccountController(IOptions<AppSettings> appSettings)
+        {
+             _appSettings=  appSettings.Value;
+        }
+        
+        public IActionResult login(){
+          ...
+          claims.Add(new Claim(ClaimTypes.Role, _appSettings.AuthKeys.AdminPolicyKey, ClaimValueTypes.String, Issuer));
+          var userIdentity = new ClaimsIdentity(_appSettings.AuthKeys.SuperSecureLogin);
+          ...
+        }
+</pre>
+
+From this process, we can add any necessary dummy data into appsetting.json for applicaiton. we can easily manage the resorces in this json file as we did in appsetting tag in web.config. 
+
+Of course, we can make asp.net 5 core a big gut via add middleware in. 
+
 ##TypeScript in Asp.net Core
 
 TypeScript can be installed in various ways, VS 2015 has taken typescript as a default js programming in vs 2015 asp.net core. Typescript 2 now is available, namespace is invented to represent internal module and module now can be the external module.
