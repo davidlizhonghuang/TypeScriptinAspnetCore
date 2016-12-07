@@ -30,7 +30,7 @@ Asp.net Core's power is its capability of developing loose coupled enterprise ba
 
 Httpmodule for file name retriving and httphandler for other http requests in asp.net 4 pipeline, both are registered in web.config, are disappeared in asp.net 5 together with global.aspx , web.config, and application life cycle. Asp.net 5 uses middleware to replace all of them.
 
-### error handler
+### Error handler
 The first middleware in asp.net 5 is the error handler in default startup file such as below
 app.UseExceptionHandler("/Home/Error");
 
@@ -39,7 +39,7 @@ app.UseMiddleware(typeof(TeaErrorHandler));
 
 This middleware will manage all exceptions from the context that go through the eentire pipeline middleware.  
 
-###add cors policy
+###Add cors policy
 CORS is the headache in asp.net 4. asp.net 5 and core can elegantly sort out the mess problems for developers. If we want to enable cors for a controller, we simply use [enablecors("corepolicy")] attribute to open a hole for this secured api controller. How api controller knows corepolicy, we do this in startup middleware. we add a corepolicy in startup configure method as below
 
 <pre>
@@ -59,7 +59,7 @@ app.UseCors("CorsPolicy")
 
 that is it. now we can add this policy to controller for CORS.
 
-###Asp.net core appsettings.json
+###Appsettings.json
 
 Web.config has been replaced by this json file. so we can set sql connection string here, we can set key/value pairs here. Then we can call parameters from this json in environment for parameter management in application. we of course need to chain this to middlware for application that can acknowledge this. see the code below
 
