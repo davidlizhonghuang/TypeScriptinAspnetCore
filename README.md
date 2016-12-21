@@ -249,7 +249,8 @@ Create Get,  Put, Delete,  and Post actions in this controller as the example be
               await  _context.SaveChangesAsync();
             }
             return Json("done");
-        }
+
+}
 
 </pre>
 Now an Asp.net web api has been created for front end developent.
@@ -258,6 +259,7 @@ Now an Asp.net web api has been created for front end developent.
 At moment, we forget about angular js. We use built in typescript in asp.net core for front end development.
 Create a folder called ts under wwwroot folder and add a new item , select typescript and create a new app.ts file under this new folder
 Add  below code to app.ts 
+
 <pre>
 module slotlocal
 {
@@ -308,7 +310,19 @@ Now in Razor cshtml page add some html controls in as example below
 <img src="xsc1.png">
 After Click search button , we can see two records are displayed as below
 <img src="xsc.png">
-### 3, Summary
+### 3, Angular 2 typeScript front end development
+
+Pure TypeScript will use ajax call for backend data retriving. TypeScript is integrated with angular 2. So we can use angular 2 in typescript for SPA page development in asp.net core.
+
+We will quickly find out that angular 2 mainly is used in development components that glue html and typescript together. thisis important. After we understand this, we can easily merge angular 2 with typescript without panic.
+
+When we think we will get data from somewhere for html, we write typescript class code. when we think we want to publish data into html, we think to develop a component with angular 2 to do so. That is it.
+
+Angular 2 marrys with typescript for http service. typescript uses http service in angular 2 to replace ajax call in pure typescript for CRUD data manipulation. This is it.
+
+Finally we can focus on the pure angualr 2 UI development with angualar 2 UI component and directives,etc. this is all story I have donw so far.
+
+### 4, Summary
 Now we can see the typescript in vs 2015 asp.net core can be used to develop CRUD operations in asp.net core application easily. 
 
 
