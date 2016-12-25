@@ -314,16 +314,16 @@ After Click search button , we can see two records are displayed as below
 
 Pure TypeScript will use ajax call for backend data retriving. TypeScript is integrated with angular 2. So we can use angular 2 in typescript for SPA page development in asp.net core.
 
-We will quickly find out that angular 2 mainly is used in development components that glue html and typescript together. thisis important. After we understand this, we can easily merge angular 2 with typescript without panic.
+We will quickly find out that angular 2 mainly is used in developing components that glue html and typescript together. This is important. After we understand this, we can easily merge angular 2 with typescript without panic.
 
-When we think we will get data from somewhere for html, we write typescript class code. when we think we want to publish data into html, we think to develop a component with angular 2 to do so. That is it.
+When we think we will get data from somewhere for html, we write typescript class code. When we think we want to publish data into html, we think to develop a component with angular 2 to do so. That is it.
 
-Angular 2 marrys with typescript for http service. typescript uses http service in angular 2 to replace ajax call in pure typescript for CRUD data manipulation. This is it.
+Angular 2 marrys with typescript for http service. Typescript uses http service in angular 2 to replace ajax call in pure typescript for CRUD data manipulation. This is it.
 
-Finally we can focus on the pure angualr 2 UI development with angualar 2 UI component and directives,etc. this is all story I have donw so far.
+Finally we can focus on the pure angualr 2 UI development with angualar 2 UI component and directives,etc. This is all story I have done so far.
 
 ### 4, Summary
-Now we can see the typescript in vs 2015 asp.net core can be used to develop CRUD operations in asp.net core application easily. 
+Now we can see the typescript in vs 2015 asp.net core can be used to develop CRUD operations in asp.net core application easily, angular 2 is the subset of typescript we can use for SPA development. 
 
 
 
