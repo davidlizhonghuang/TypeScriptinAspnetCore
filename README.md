@@ -310,6 +310,7 @@ Now in Razor cshtml page add some html controls in as example below
 <img src="xsc1.png">
 After Click search button , we can see two records are displayed as below
 <img src="xsc.png">
+
 ### 3, Angular 2 typeScript front end development
 
 Pure TypeScript will use ajax call for backend data retriving. TypeScript is integrated with angular 2. So we can use angular 2 in typescript for SPA page development in asp.net core.
@@ -320,7 +321,148 @@ When we think we will get data from somewhere for html, we write typescript clas
 
 Angular 2 marrys with typescript for http service. Typescript uses http service in angular 2 to replace ajax call in pure typescript for CRUD data manipulation. This is it.
 
-Finally we can focus on the pure angualr 2 UI development with angualar 2 UI component and directives,etc. This is all story I have done so far.
+Finally we can focus on the pure angualr 2 UI development with angualar 2 UI component and directives,etc. 
+
+1) Business Logic 
+
+We want to develop a SPA page that looks as example below
+
+page will contain 
+
+1, menu in page
+2, data list from database
+3, text 
+4, image collection
+
+we need to use angualr 2 to develop this page, therefore, we need to develop 4 angular component s as below
+
+1, menu component
+2, datalist component
+3, text component
+4, imagecollect compoent
+
+we will code angular in visual studio 2017 where typescript is embedded
+
+at first, we 
+
+1, install angular 2 template
+2, npm install packages
+3, npm start 
+
+secondly, we develop four components as below
+
+<pre>
+import { NgModule, Injectable }      from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpModule } from '@angular/http';
+import { RouterModule, Routes } from '@angular/router';
+
+import { AppComponent } from './app.component';
+import { MenuServices } from './app.menuservice';
+import { MenuComponent } from './app.menu';
+import { ProductsComponent } from './app.productcomponent';
+import { NotFoundPageComponent } from './app.notfoungcomponent';
+import { TextHoldComponent } from './app.textcomponent';
+
+import { Home  } from './app.rout1';
+import { About } from './app.rout2';
+import { MovieComponent } from './app.movielistcomponent';
+import { MovieService } from './app.movieService';
+import { GalleryComponent } from './app.gallerycomponent';
+import { ImgCollectComponent } from './app.imgColleccomponent';
+
+const RouteHrl: Routes = [
+    { path: 'Contacts', component: Home },
+    { path: 'Products', component: ProductsComponent },
+    { path: 'Services', component: Home },
+    { path: 'Components', component: AppComponent },
+    { path: '', component: Home },
+    { path: 'about', component: About },
+    { path: '**', component: NotFoundPageComponent }
+]
+
+@NgModule({
+    imports: [
+        BrowserModule,
+        HttpModule,
+        RouterModule.forRoot(RouteHrl),-----menu router 
+    ],
+    declarations: [
+        AppComponent,
+        MenuComponent, ----------------menu component
+        ProductsComponent, -----------data list component
+        NotFoundPageComponent,--------page not founc component
+        Home,
+        About,
+        MovieComponent,
+        TextHoldComponent,-----------text component
+        GalleryComponent, -----------image collection component
+        ImgCollectComponent
+        ],
+  bootstrap: [AppComponent],
+  providers: [MenuServices, MovieService]-------------data from SQL server
+})
+export class AppModule { }
+
+</pre>
+
+angular http service has been polished by angular and typecsript team, now it is our time to use this http service easily for backend data communication. One example I coded is as below
+
+<pre>
+import { Injectable } from '@angular/core';
+import { Http, Response,RequestOptions, Headers } from '@angular/http';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/toPromise';
+
+@Injectable()
+export class MovieService{
+    private userurl = "http://localhost:57836/Movies";
+    constructor(private http: Http) { }
+    getMovie() {
+        let headers = new Headers({ 'Access-Control-Allow-Origin': '*' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.userurl, options).map((res: Response) => (res.json()));
+    }
+}
+</pre>
+
+Here, we need to fix the cross domain security problem when we use http service in angular such as the url used here, we get movie data from sql server, in order to do so, used the asp.net core to develop cors enabled MVC or API controllers to expose data for angular front end. then we can simple return the retreve data as a response from http request. This is the new stuff in typescript, we use map or topromise or subscribe functions to handle the response data such as return Observable<any>. After this data has been returned to front end, angular typescript component then can handle this data as array that will be used in *ngFor='let ds in dss' loop for data list view as example code below
+<pre>
+import { Component } from '@angular/core';
+import { MovieService } from './app.movieService';
+import { Observable } from 'rxjs/Observable';
+@Component({
+    selector: 'movie-list',
+    templateUrl: 'templates/movielist.html',
+    styleUrls: ["css/product.css", "css/menu.css", "Content/bootstrap.min.css"]
+})
+export class MovieComponent {
+    private moviearray: Movie[] = [];
+    constructor(private movieServcie: MovieService) {
+        var ds = movieServcie.getMovie()
+            .subscribe((dat) => {
+             this.moviearray = dat; 
+            });
+    }
+}
+</pre>
+<pre>
+<div>
+  <h3>Movie List</h3>
+  <Table class="table table-responsive">
+    <tr><th>Title</th><th>Release Date</th><th>Price</th></tr>
+  <tr *ngFor="let mv of moviearray">
+   <td>{{mv.title}}</td>
+    <td>{{mv.releaseDate}}</td>
+    <td>{{mv.price}}</td>
+    </tr>
+  </Table>
+</div>
+</pre>
+
+Now we can say using anular 2 , we can develop angular components to organize html contnents in component, html page syntax is greatly reduced. this can speed up the page load. We control web content displaying in page via call async angular component in angular app without loading all html codes, this greatly improve the data loading speed in page. 
+
+angular components also can be reused if necessary, this can save a lot of time in development, we need to manage those components effectively.
 
 ### 4, Summary
 Now we can see the typescript in vs 2015 asp.net core can be used to develop CRUD operations in asp.net core application easily, angular 2 is the subset of typescript we can use for SPA development. 
